@@ -17,14 +17,14 @@ class ProblemService:
         self.db = db
 
     async def create(
-            self,
-            contest_id: int,
-            index: str,
-            name: str,
-            category: str,
-            points: Optional[float] = None,
-            solved_count: int = 0,
-            tags: List[str] = None
+        self,
+        contest_id: int,
+        index: str,
+        name: str,
+        category: str,
+        points: Optional[float] = None,
+        solved_count: int = 0,
+        tags: List[str] = None,
     ) -> Problem:
         db_problem = Problem(
             contest_id=contest_id,
@@ -32,7 +32,7 @@ class ProblemService:
             name=name,
             category=category,
             points=points,
-            solved_count=solved_count
+            solved_count=solved_count,
         )
 
         self.db.add(db_problem)
@@ -61,18 +61,16 @@ class ProblemService:
 
     async def get_by_tag(self, tag_name: str) -> List[Type[Problem]]:
         result = await self.db.execute(
-            select(Problem)
-            .join(Problem.tags)
-            .filter(Tag.name == tag_name)
+            select(Problem).join(Problem.tags).filter(Tag.name == tag_name)
         )
         return result.scalars().all()
 
     async def get_random_by_tag_and_points_range(
-            self,
-            tag_name: str,
-            min_points: float,
-            max_points: Optional[float] = None,
-            limit: int = 10
+        self,
+        tag_name: str,
+        min_points: float,
+        max_points: Optional[float] = None,
+        limit: int = 10,
     ) -> List[Problem]:
         conditions = [Tag.name == tag_name, Problem.points >= min_points]
 
@@ -80,9 +78,7 @@ class ProblemService:
             conditions.append(Problem.points <= max_points)
 
         result = await self.db.execute(
-            select(Problem)
-            .join(Problem.tags)
-            .filter(and_(*conditions))
+            select(Problem).join(Problem.tags).filter(and_(*conditions))
         )
         problems = result.scalars().all()
         random.shuffle(problems)

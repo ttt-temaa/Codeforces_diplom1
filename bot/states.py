@@ -2,7 +2,7 @@
 # Этот модуль содержит класс состояний, используемых для управления диалогом с пользователем.
 
 
-from aiogram.fsm.state import StatesGroup, State
+from aiogram.fsm.state import State, StatesGroup
 
 
 class QuizStates(StatesGroup):
