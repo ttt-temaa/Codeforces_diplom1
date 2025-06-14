@@ -14,14 +14,14 @@ class ProblemCRUD:
         self.session = ProblemService(session)
 
     async def create(
-            self,
-            contest_id: int,
-            index: str,
-            name: str,
-            category: str,
-            points: Optional[float] = None,
-            solved_count: int = 0,
-            tags: List[str] = None
+        self,
+        contest_id: int,
+        index: str,
+        name: str,
+        category: str,
+        points: Optional[float] = None,
+        solved_count: int = 0,
+        tags: List[str] = None,
     ) -> Problem:
         return await self.session.create(
             contest_id=contest_id,
@@ -30,7 +30,7 @@ class ProblemCRUD:
             category=category,
             points=points,
             solved_count=solved_count,
-            tags=tags
+            tags=tags,
         )
 
     async def get(self, contest_id: int, index: str) -> Optional[Problem]:
@@ -43,11 +43,11 @@ class ProblemCRUD:
         return await self.session.get_by_tag(tag_name)
 
     async def get_random_by_tag_and_points_range(
-            self,
-            tag_name: str,
-            min_points: float,
-            max_points: Optional[float] = None,
-            limit: int = 10
+        self,
+        tag_name: str,
+        min_points: float,
+        max_points: Optional[float] = None,
+        limit: int = 10,
     ) -> List[Problem]:
         return await self.session.get_random_by_tag_and_points_range(
             tag_name, min_points, max_points, limit

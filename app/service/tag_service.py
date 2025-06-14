@@ -1,7 +1,7 @@
 # Модуль сервисного слоя для работы с тегами.
 # Этот модуль предоставляет бизнес-логику для работы с тегами в базе данных.
 
-from typing import Type, List, Optional
+from typing import List, Optional, Type
 
 from sqlalchemy.ext.asyncio import AsyncSession
 from sqlalchemy.future import select
@@ -14,9 +14,7 @@ class TagService:
         self.session = session
 
     async def get_by_name(self, name: str) -> Optional[Tag]:
-        result = await self.session.execute(
-            select(Tag).filter_by(name=name)
-        )
+        result = await self.session.execute(select(Tag).filter_by(name=name))
         return result.scalars().first()
 
     async def create(self, name: str) -> Tag:

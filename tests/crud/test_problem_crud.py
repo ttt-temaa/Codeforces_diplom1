@@ -27,7 +27,7 @@ async def test_create(crud):
         category="Algorithms",
         points=100,
         solved_count=0,
-        tags=["dp"]
+        tags=["dp"],
     )
     crud.session.create.assert_called_once_with(
         contest_id=1,
@@ -36,7 +36,7 @@ async def test_create(crud):
         category="Algorithms",
         points=100,
         solved_count=0,
-        tags=["dp"]
+        tags=["dp"],
     )
     assert isinstance(result, Problem)
     assert result.name == "Test Problem"
@@ -74,9 +74,13 @@ async def test_get_by_tag(crud):
 
 @pytest.mark.asyncio
 async def test_get_random_by_tag_and_points_range(crud):
-    crud.session.get_random_by_tag_and_points_range = AsyncMock(return_value=[Problem(id=1)])
+    crud.session.get_random_by_tag_and_points_range = AsyncMock(
+        return_value=[Problem(id=1)]
+    )
 
     result = await crud.get_random_by_tag_and_points_range("dp", 50, 100, 5)
-    crud.session.get_random_by_tag_and_points_range.assert_called_once_with("dp", 50, 100, 5)
+    crud.session.get_random_by_tag_and_points_range.assert_called_once_with(
+        "dp", 50, 100, 5
+    )
     assert isinstance(result, list)
     assert all(isinstance(p, Problem) for p in result)

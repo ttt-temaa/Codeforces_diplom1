@@ -20,7 +20,7 @@ PORT = os.getenv("PORT")
 DATABASE = os.getenv("DATABASE")
 
 # Настройки временной зоны для планировщика задач
-moscow = timezone('Europe/Moscow')  # Временная зона Москвы
+moscow = timezone("Europe/Moscow")  # Временная зона Москвы
 
 # Настройки Telegram бота
 TOKEN = os.getenv("TOKEN")  # Токен бота

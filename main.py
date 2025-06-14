@@ -16,8 +16,8 @@ from bot.bot import start_bot
 from constants import moscow
 
 logging.basicConfig(level=logging.DEBUG)
-logging.getLogger('sqlalchemy.engine').setLevel(logging.INFO)
-logging.getLogger('asyncpg').setLevel(logging.DEBUG)
+logging.getLogger("sqlalchemy.engine").setLevel(logging.INFO)
+logging.getLogger("asyncpg").setLevel(logging.DEBUG)
 
 
 async def fill_db_async_wrapper():

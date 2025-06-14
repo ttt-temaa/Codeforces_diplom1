@@ -19,8 +19,6 @@ telegram_bot = Bot(token=TOKEN)
 storage = MemoryStorage()
 dp = Dispatcher(storage=storage)
 
-import bot.handlers
-
 
 async def start_bot():
     await dp.start_polling(telegram_bot)
